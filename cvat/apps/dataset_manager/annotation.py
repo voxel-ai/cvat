@@ -454,12 +454,9 @@ class TrackManager(ObjectManager):
 
         def simple_interpolation(shape0, shape1):
             shapes = []
-            distance = shape1["frame"] - shape0["frame"]
-            diff = np.subtract(shape1["points"], shape0["points"])
-
+            # Remove interpolation of bounding boxes
             for frame in range(shape0["frame"] + 1, shape1["frame"]):
-                offset = (frame - shape0["frame"]) / distance
-                points = shape0["points"] + diff * offset
+                points = shape0["points"]
 
                 shapes.append(copy_shape(shape0, frame, points.tolist()))
 
